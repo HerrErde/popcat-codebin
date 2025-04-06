@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <meta name="theme-color" content="#7760fe" />
+    <meta property="og:title" content="Code Bin" />
+    <meta
+      property="og:description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <meta
+      property="og:image"
+      content="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <meta name="twitter:title" content="Code Bin" />
+    <meta
+      name="twitter:description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <meta
+      name="twitter:image"
+      content="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <meta name="twitter:card" content="summary" />
+    <title>Code Bin</title>
+    <meta
+      name="description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <meta name="next-size-adjust" />
+    <meta itemprop="name" content="Code Bin" />
+    <meta
+      itemprop="description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <meta
+      itemprop="image"
+      content="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css" />
+  </head>
+
+  <body>
+    <main class="min-h-screen p-12">
+      <div class="lg:px-6">
+        <div
+          class="head flex flex-col lg:flex-row items-center justify-between">
+          <a
+            class="text-6xl flex flex-col lg:flex-row justify-center lg:items-center gap-[4.45rem] lg:gap-[6.45rem]"
+            href="/">
+            <div class="logo-container md:h-[11vh] lg:h-[7vh]">
+              <svg
+                class="item"
+                version="1.0"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 300 205"
+                preserveAspectRatio="xMidYMid meet">
+                <g>
+                  <path
+                    d="M295 1548 c-160 -276 -291 -507 -293 -515 -2 -7 128 -243 290 -523 l293 -510 399 3 400 2 210 903 210 902 232 0 231 0 221 -382 c121 -211 222 -388 224 -395 2 -6 -98 -187 -222 -402 l-224 -391 -278 0 -278 0 0 -120 0 -120 349 0 349 0 257 447 c287 499 312 540 327 545 7 3 9 14 5 29 -4 13 -137 249 -296 524 l-289 500 -400 3 -400 2 -10 -42 c-6 -24 -97 -412 -202 -863 -105 -451 -196 -839 -202 -863 l-10 -42 -231 2 -231 3 -223 385 c-122 212 -221 393 -219 402 2 9 102 188 222 397 l219 380 278 1 277 0 0 120 0 120 -348 0 -347 0 -290 -502z"
+                    class="logo-svg"></path>
+                  <path
+                    d="M691 1338 c-96 -166 -174 -307 -174 -313 0 -10 326 -578 345 -603 8 -8 49 -12 145 -12 116 0 134 2 129 15 -3 8 -80 144 -172 303 -92 158 -167 292 -167 297 0 6 77 144 171 308 95 164 172 300 172 302 0 3 -62 5 -138 5 l-137 0 -174 -302z"
+                    class="logo-svg"></path>
+                  <path
+                    d="M1850 1635 c0 -3 68 -123 152 -267 83 -145 162 -281 174 -303 l22 -40 -174 -300 c-95 -165 -174 -303 -174 -307 0 -14 266 -9 278 4 20 26 345 593 345 604 0 6 -78 147 -174 313 l-174 301 -137 0 c-76 0 -138 -2 -138 -5z"
+                    class="logo-svg"></path>
+                </g>
+              </svg>
+            </div>
+            <span
+              data-aos="fade-left"
+              data-aos-duration="1900"
+              class="mt-[7px]">
+              CodeBin
+            </span>
+          </a>
+          <a
+            data-aos="fade-left"
+            href="/create"
+            target="_blank"
+            class="cursor-pointer hover:bg-[#7760fe] hover:text-white duration-100 create-button p-2 mt-2 lg:mt-0 px-6 rounded-[7px] bg-white text-black">
+            <i class="fa-light fa-plus text-lg"></i> Create
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        AOS.init({
+          easing: 'ease',
+          duration: 400,
+          delay: 0
+        });
+      });
+    </script>
+  </body>
+</html>

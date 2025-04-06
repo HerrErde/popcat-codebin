@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <script src="{{ url_for('static', filename='js/code.js') }}"></script> -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+    <meta name="theme-color" content="#7760fe" />
+    <meta property="og:title" content="Code Bin" />
+    <meta
+      property="og:description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <meta
+      property="og:image"
+      content="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <meta name="twitter:title" content="Code Bin" />
+    <meta
+      name="twitter:description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <meta
+      name="twitter:image"
+      content="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <meta name="twitter:card" content="summary" />
+    <title>Code Bin</title>
+    <meta
+      name="description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <meta name="next-size-adjust" />
+    <meta itemprop="name" content="Code Bin" />
+    <meta
+      itemprop="description"
+      content="Store &amp; Access Your Codes On The Cloud!" />
+    <meta
+      itemprop="image"
+      content="{{ url_for('static', filename='media/round-logo.png') }}" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v6.0.0-beta2/css/all.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <style>
+      /* Hide the main content until the paste is loaded */
+      #main-content {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div
+      id="loading-screen"
+      class="relative loadingscreen flex justify-center items-center min-h-screen min-w-screen overflow-y-hidden overflow-x-hidden mt-[45vh]">
+      <div class="absolute loadingmain min-h-screen min-w-[100vw]">
+        <div class="loader"></div>
+        <h1
+          class="text-center text-white text-3xl mt-4 uppercase"
+          style="font-family: monospace">
+          Loading...
+        </h1>
+      </div>
+    </div>
+
+    <!-- Main Content (hidden until valid data is loaded) -->
+    <main id="main-content" class="min-h-screen p-12">
+      <div class="head flex flex-col lg:flex-row items-center justify-between">
+        <!-- TODO aos on h1 can be removed, as it is not on the other pages -->
+        <h1
+          data-aos="fade-left"
+          data-aos-duration="1900"
+          class="text-6xl flex justify-start items-center aos-init aos-animate">
+          <a
+            class="flex flex-col lg:flex-row justify-center lg:items-center gap-[4.45rem] lg:gap-[6.45rem]"
+            href="/">
+            <div class="logo-container md:h-[11vh] lg:h-[7vh]">
+              <svg
+                class="item"
+                version="1.0"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 300 205"
+                preserveAspectRatio="xMidYMid meet">
+                <g>
+                  <path
+                    d="M295 1548 c-160 -276 -291 -507 -293 -515 -2 -7 128 -243 290 -523 l293 -510 399 3 400 2 210 903 210 902 232 0 231 0 221 -382 c121 -211 222 -388 224 -395 2 -6 -98 -187 -222 -402 l-224 -391 -278 0 -278 0 0 -120 0 -120 349 0 349 0 257 447 c287 499 312 540 327 545 7 3 9 14 5 29 -4 13 -137 249 -296 524 l-289 500 -400 3 -400 2 -10 -42 c-6 -24 -97 -412 -202 -863 -105 -451 -196 -839 -202 -863 l-10 -42 -231 2 -231 3 -223 385 c-122 212 -221 393 -219 402 2 9 102 188 222 397 l219 380 278 1 277 0 0 120 0 120 -348 0 -347 0 -290 -502z"
+                    class="logo-svg"></path>
+                  <path
+                    d="M691 1338 c-96 -166 -174 -307 -174 -313 0 -10 326 -578 345 -603 8 -8 49 -12 145 -12 116 0 134 2 129 15 -3 8 -80 144 -172 303 -92 158 -167 292 -167 297 0 6 77 144 171 308 95 164 172 300 172 302 0 3 -62 5 -138 5 l-137 0 -174 -302z"
+                    class="logo-svg"></path>
+                  <path
+                    d="M1850 1635 c0 -3 68 -123 152 -267 83 -145 162 -281 174 -303 l22 -40 -174 -300 c-95 -165 -174 -303 -174 -307 0 -14 266 -9 278 4 20 26 345 593 345 604 0 6 -78 147 -174 313 l-174 301 -137 0 c-76 0 -138 -2 -138 -5z"
+                    class="logo-svg"></path>
+                </g>
+              </svg>
+            </div>
+            <span
+              data-aos="fade-left"
+              data-aos-duration="1900"
+              class="flex items-center justify-between">
+              <span class="mt-[7px]">CodeBin</span>
+            </span>
+          </a>
+          <span
+            data-aos="fade-left"
+            data-aos-duration="1900"
+            id="copy-btn"
+            class="icon-wrapper flex justify-center mt-[7px]">
+            <i
+              class="cursor-pointer fa-regular fa-link-simple text-[#c6c6c6] text-lg ml-3 copy-tooltip"></i>
+          </span>
+        </h1>
+        <div class="dropdown-container">
+          <!-- Theme Dropdown -->
+          <div
+            role="combobox"
+            aria-expanded="false"
+            aria-autocomplete="none"
+            class="flex text-md h-12 items-center justify-between whitespace-nowrap rounded-md bg-[#ffffff0d] px-3 py-[1.3rem] shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed border border-[hsla(0,0%,12%,1)] disabled:opacity-50 w-[50%] lg:w-[280px]"
+            style="backdrop-filter: blur(3px)">
+            <div class="flex w-full justify-start items-center">
+              <i class="fa-solid fa-terminal mr-3 text-[#ffffff]"></i>
+              <select
+                id="theme-select"
+                class="flex w-full bg-transparent border-none focus:outline-none"></select>
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 opacity-50"
+                aria-hidden="true">
+                <path
+                  d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Language Dropdown -->
+          <div
+            role="combobox"
+            aria-expanded="false"
+            aria-autocomplete="none"
+            class="flex text-md h-12 items-center justify-between whitespace-nowrap rounded-md bg-[#ffffff0d] px-3 py-[1.3rem] shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed border border-[hsla(0,0%,12%,1)] disabled:opacity-50 w-[50%] lg:w-[280px]"
+            style="backdrop-filter: blur(3px)">
+            <div class="flex w-full justify-start items-center">
+              <i class="fa-solid fa-terminal mr-3 text-[#ffffff]"></i>
+              <select
+                id="language-select"
+                class="flex w-full bg-transparent border-none focus:outline-none"></select>
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 15 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 opacity-50"
+                aria-hidden="true">
+                <path
+                  d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        data-aos="fade-zoom-in"
+        data-aos-duration="2000"
+        class="main-box relative mt-4 p-6 rounded-lg border border-[hsla(0,0%,12%,1)] bg-[#ffffff0a] aos-init aos-animate"
+        style="backdrop-filter: blur(7.2px)">
+        <div
+          class="views absolute right-6 top-[13.5px] text-lg p-[0.11rem] px-[0.71rem] bg-[#ffffff0d] rounded-[0.5rem]">
+          Views
+        </div>
+        <div class="form-container flex flex-col mb-4">
+          <h2 class="form-label text-xl uppercase">Title</h2>
+          <div class="form-input flex flex-col justify-center"></div>
+        </div>
+        <div class="form-container flex flex-col mb-4">
+          <h2 class="form-label text-xl uppercase">Description</h2>
+          <div class="form-input flex flex-col justify-center"></div>
+        </div>
+        <h2 class="form-label text-xl uppercase">Code</h2>
+
+        <div
+          id="monaco-editor"
+          style="
+            display: flex;
+            position: relative;
+            width: 100%;
+            height: 90vh;
+          "></div>
+      </div>
+      <div class="Toastify"></div>
+    </main>
+  </body>
+  <!-- FIXME Aos not loading -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Wait for data to load (simulate with a timeout if necessary)
+      setTimeout(() => {
+        // Hide loading screen
+        document.getElementById('loading-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+
+        // Initialize AOS after the loading screen is removed
+        AOS.init();
+
+        // Manually trigger AOS animation for "CodeBin"
+        let codeBinText = document.querySelector('h1 .mt-\\[7px\\]');
+
+        codeBinText.classList.remove('aos-animate');
+        setTimeout(() => {
+          codeBinText.classList.add('aos-animate');
+        }, 100); // Delay to ensure re-triggering
+      }, 1000); // Adjust time based on actual data loading
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+  <!-- RequireJS configuration -->
+  <script>
+    require.config({
+      paths: {
+        vs: 'https://unpkg.com/monaco-editor@latest/min/vs'
+      }
+    });
+  </script>
+
+  <!-- Monaco worker setup -->
+  <script>
+    window.MonacoEnvironment = {
+      getWorkerUrl: function () {
+        return proxy;
+      }
+    };
+
+    var proxy = URL.createObjectURL(
+      new Blob(
+        [
+          `
+	self.MonacoEnvironment = {baseUrl: 'https://unpkg.com/monaco-editor@latest/min/'};
+	importScripts('https://unpkg.com/monaco-editor@latest/min/vs/base/worker/workerMain.js');
+            `
+        ],
+        { type: 'text/javascript' }
+      )
+    );
+  </script>
+
+  <!-- Main Script: First check for paste data then load the editor -->
+  <script>
+    // Prevent further requests if paste is not found.
+    window.pasteNotFound = false;
+
+    // Fetch paste data from the API and resolve with the paste object.
+    function fetchPasteData() {
+      const slug = window.location.pathname.split('/').pop();
+      return fetch(`/api/getpaste/${slug}`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Request failed');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data && typeof data === 'object' && data.paste) {
+            return data.paste;
+          }
+          throw new Error('Invalid data');
+        });
+    }
+
+    // Replace the page with an error message.
+    function showError() {
+      document.body.innerHTML = `
+            <div data-aos="fade-up" class="text-center flex flex-col items-center justify-center text-[#cbcaca] mt-[20vh]">
+              <span class="text-6xl primarytext">Paste Not Found!</span>
+            </div>`;
+    }
+
+    // Hide the loading screen and show the main content.
+    function hideLoadingScreen() {
+      var loadingEl = document.getElementById('loading-screen');
+      if (loadingEl) {
+        loadingEl.style.display = 'none';
+      }
+      var mainEl = document.getElementById('main-content');
+      if (mainEl) {
+        mainEl.style.display = 'block';
+      }
+    }
+
+    // Initialize the Monaco Editor using the fetched paste data.
+    function initializeEditor(paste) {
+      require(['vs/editor/editor.main'], function () {
+        // Create the editor instance
+        window.editor = monaco.editor.create(
+          document.getElementById('monaco-editor'),
+          {
+            automaticLayout: true,
+            minimap: { enabled: true },
+            readOnly: true
+          }
+        );
+        // Update UI elements.
+        document.title = paste.title || 'Untitled Paste';
+        var viewsElement = document.querySelector('.views');
+        if (viewsElement) {
+          viewsElement.textContent = paste.clicks + ' Views';
+        }
+        var titleElements = document.querySelectorAll('.form-input');
+        titleElements.forEach(function (el) {
+          el.textContent = paste.title || 'Untitled';
+        });
+        // Set the editor content.
+        window.editor.setValue(paste.code || '');
+        monaco.editor.setModelLanguage(
+          window.editor.getModel(),
+          paste.language
+        );
+
+        hideLoadingScreen();
+
+        // Populate language select dropdown
+        var languageList = [
+          'JavaScript',
+          'JSON',
+          'HTML',
+          'CSS',
+          'Markdown',
+          'PlainText'
+        ];
+        var languageSelect = document.getElementById('language-select');
+        languageList.forEach(function (lang) {
+          var option = document.createElement('option');
+          // Use lower-case id for Monaco languages (PlainText becomes 'plaintext')
+          option.value = lang.toLowerCase();
+          option.textContent = lang;
+          languageSelect.appendChild(option);
+        });
+        // Default language selection
+        languageSelect.value = paste.language;
+
+        // Set default theme key based on paste.theme (if provided) or fallback.
+        var themeDisplayName = paste.theme;
+        var themeMap = {}; // Maps theme key to display name
+        var loadedThemes = {}; // Tracks which themes are loaded
+
+        var themeSelect = document.getElementById('theme-select');
+        var themeListUrl =
+          'https://raw.githubusercontent.com/brijeshb42/monaco-themes/refs/heads/master/themes/themelist.json';
+        var themeUrlTemplate =
+          'https://raw.githubusercontent.com/brijeshb42/monaco-themes/refs/heads/master/themes/{themname}.json';
+
+        // Fetch and populate theme dropdown
+        fetch(themeListUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            Object.keys(data).forEach(function (key) {
+              themeMap[key] = data[key];
+
+              var option = document.createElement('option');
+              option.value = key;
+              option.textContent = data[key];
+              themeSelect.appendChild(option);
+            });
+
+            // Find the key corresponding to themeDisplayName
+            var selectedThemeKey = Object.keys(themeMap).find(
+              (key) => themeMap[key] === themeDisplayName
+            );
+
+            // Set default theme from paste or fallback if available
+            if (selectedThemeKey) {
+              themeSelect.value = selectedThemeKey;
+              console.log(themeDisplayName);
+              loadTheme(themeDisplayName, selectedThemeKey);
+            }
+          })
+          .catch((error) => console.error('Error fetching theme list:', error));
+
+        // Function to load and apply a theme
+        function loadTheme(themeValue, themeKey) {
+          var themeValue = encodeURIComponent(themeValue);
+          if (loadedThemes[themeValue]) {
+            monaco.editor.setTheme(themeValue);
+            return;
+          }
+
+          // Build URL using the encoded theme key
+          var themeUrl = themeUrlTemplate.replace('{themname}', themeValue);
+          fetch(themeUrl)
+            .then((response) => response.json())
+            .then((data) => {
+              if (
+                typeof MonacoThemes !== 'undefined' &&
+                MonacoThemes.parseTmTheme
+              ) {
+                var parsed = MonacoThemes.parseTmTheme(data);
+                monaco.editor.defineTheme(themeKey, parsed);
+              } else {
+                monaco.editor.defineTheme(themeKey, data);
+              }
+              loadedThemes[themeKey] = true;
+              monaco.editor.setTheme(themeKey);
+            })
+            .catch((error) => {
+              console.error('Failed to load theme:', error);
+            });
+        }
+
+        // Listen for theme selection changes
+        themeSelect.addEventListener('change', function () {
+          var selectedThemeKey = themeSelect.value;
+          var selectedThemeName =
+            themeSelect.options[themeSelect.selectedIndex].textContent;
+          console.log(selectedThemeName);
+          loadTheme(selectedThemeName, selectedThemeKey);
+        });
+
+        // Listen for language selection changes
+        languageSelect.addEventListener('change', function () {
+          var selectedLang = languageSelect.value;
+          console.log(selectedLang);
+          if (window.editor) {
+            monaco.editor.setModelLanguage(
+              window.editor.getModel(),
+              selectedLang
+            );
+          }
+        });
+      });
+    }
+
+    // Update the editor (used on visibility change if already loaded).
+    function updateEditor() {
+      if (window.pasteNotFound) return;
+      fetchPasteData()
+        .then(function (paste) {
+          if (window.editor) {
+            window.editor.setValue(paste.code || '');
+            monaco.editor.setModelLanguage(
+              window.editor.getModel(),
+              paste.language || 'plaintext'
+            );
+            monaco.editor.setTheme(paste.theme || 'vs-dark');
+          }
+          document.title = paste.title || 'Untitled Paste';
+          var viewsElement = document.querySelector('.views');
+          if (viewsElement) {
+            viewsElement.textContent = paste.clicks + ' Views';
+          }
+          var titleElements = document.querySelectorAll('.form-input');
+          titleElements.forEach(function (el) {
+            el.textContent = paste.title || 'Untitled';
+          });
+        })
+        .catch(function (err) {
+          console.error('Error updating:', err);
+          showError();
+          window.pasteNotFound = true;
+        });
+    }
+
+    // Initial check: fetch paste data first, then load the editor if valid.
+    fetchPasteData()
+      .then(function (paste) {
+        // Valid data – initialize the editor.
+        initializeEditor(paste);
+      })
+      .catch(function (error) {
+        console.error('Error fetching initial paste:', error);
+        showError();
+        window.pasteNotFound = true;
+      });
+
+    // Refresh paste data if the user returns after being away.
+    let wasUnfocused = false;
+    let unfocusedTime = 0;
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        wasUnfocused = true;
+        unfocusedTime = Date.now();
+      } else {
+        const elapsed = Date.now() - unfocusedTime;
+        if (wasUnfocused && elapsed > 3000) {
+          updateEditor();
+        }
+        wasUnfocused = false;
+      }
+    });
+
+    // Copy button event handler.
+    document.getElementById('copy-btn').addEventListener('click', function () {
+      navigator.clipboard
+        .writeText(window.location.href)
+        .then(function () {
+          toastr.success('Link Copied to Clipboard', '', {
+            progressBar: true,
+            positionClass: 'toast-bottom-right',
+            showDuration: '5000'
+          });
+        })
+        .catch(function (err) {
+          console.error('Failed to copy URL:', err);
+        });
+    });
+  </script>
+</html>

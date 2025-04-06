@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+
+* {
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  background: #242582;
+}
+
+h1 {
+  color: white;
+  font-size: 4rem;
+}
+
+#bg {
+  background-color: #000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.container {
+  text-align: center;
+  margin-top: 10vh !important;
+}
+
+.accordion {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+.pj-item {
+  color: cyan;
+  text-decoration: none;
+  transition-duration: 0.5s;
+  font-family: monospace;
+}
+
+.pj-item:hover {
+  color: whitesmoke;
+  text-decoration: underline;
+}
+
+.accordion-item-body-content {
+  color: white;
+  padding: 1rem;
+  line-height: 1.5rem;
+  border-top: 1px solid;
+  border-image: linear-gradient(to right, transparent, #34495e, transparent) 1;
+}
+
+.accordion-item {
+  background-color: black;
+  color: #111;
+  font-family: monospace;
+  margin: 2rem 0;
+  height: auto;
+  border-radius: none;
+  box-shadow: 0 5px 15px white;
+  opacity: 0.9;
+}
+
+.accordion-item-header {
+  margin-left: 20px;
+  color: white;
+  padding: 1.6rem;
+  font-family: 'Raleway', sans-serif;
+  min-height: 3.5rem;
+  line-height: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.accordion-item-header::after {
+  content: '\002B';
+  font-size: 2rem;
+  position: absolute;
+  right: 1rem;
+}
+
+.accordion-item-header.active::after {
+  content: '\2212';
+}
+
+.accordion-item-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}

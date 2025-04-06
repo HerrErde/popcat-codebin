@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/tailwind.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}" />
+    <meta content="#ffcc99" name="theme-color" />
+    <title>URL Shortener</title>
+    <meta
+      content="Quick &amp; Easy To Use URL Shortener Service!"
+      name="description" />
+    <link rel="icon" href="https://cdn.popcat.xyz/popcat.png" />
+  </head>
+  <body>
+    <div
+      class="relative loadingscreen flex justify-center items-center min-h-screen min-w-screen overflow-y-hidden overflow-x-hidden mt-[45vh]">
+      <div class="absolute loadingmain min-h-screen min-w-[100vw]">
+        <div class="loader"></div>
+        <h1
+          class="text-center text-white text-3xl mt-4 uppercase"
+          style="font-family: monospace">
+          Loading...
+        </h1>
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', async () => {
+        try {
+          // Show loading screen immediately
+          const response = await fetch('/api/data', {
+            headers: { Accept: 'text/html' }
+          });
+
+          // Handle non-200 responses
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          // Update content
+          document.body.innerHTML = await response.text();
+
+          // Re-initialize any scripts
+          document.querySelectorAll('script').forEach((script) => {
+            const newScript = document.createElement('script');
+            newScript.textContent = script.textContent;
+            if (script.src) newScript.src = script.src;
+            document.body.appendChild(newScript);
+          });
+        } catch (error) {
+          document.body.innerHTML = `
+                  <div class="error-screen">
+                      <h2>Loading Failed</h2>
+                      <p>${error.message}</p>
+                      <button onclick="location.reload()">Retry</button>
+                  </div>
+              `;
+        }
+      });
+    </script>
+  </body>
+</html>
