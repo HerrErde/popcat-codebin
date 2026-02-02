@@ -4,7 +4,6 @@ from pymongo import errors
 
 import config
 
-
 db_host = config.DB_HOST
 db_user = config.DB_USER
 db_pass = config.DB_PASS
