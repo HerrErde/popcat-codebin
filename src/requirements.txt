@@ -1,4 +1,4 @@
-cryptography==46.0.5
+cryptography==46.0.6
 motor==3.7.1
 pymongo==4.16.0
 python-dotenv==1.2.2
