@@ -58,7 +58,7 @@ jobs:
         with:
           commit_message: 'Style fixes'
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set Output Commit Hash
         run: echo "commit_hash=steps.auto-commit.outputs.commit_hash" >> $GITHUB_ENV
@@ -93,7 +93,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.TOKEN }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract metadata for Docker
         id: meta
